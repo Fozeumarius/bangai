@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="C:\Users\FOZEU\Desktop\projet\css\style.css">
+</head>
+<body>
+  <!-- Login Section -->
+  <section class="login-container">
+    <!-- Left Side: Image -->
+    <div class="login-image">
+      <img src="C:\Users\FOZEU\Desktop\projet\img\1.jpg" alt="Apartment View">
+    </div>
+
+    <!-- Right Side: Login Form -->
+    <div class="login-form">
+      <h2>Welcome Back</h2>
+      <form id="loginForm">
+        <label for="username">Username</label>
+        <input type="text" id="username" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" required>
+
+        <button type="submit" class="btn">Login</button>
+        <p id="loginMessage"></p>
+      </form>
+
+      <!-- Integrated Sign Up link -->
+      <p class="signup-text">
+        Don’t have an account? <a href="sign_in.html">Sign up here</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const loginForm = document.getElementById("loginForm");
+      const loginMessage = document.getElementById("loginMessage");
+
+      loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        if (username === "tenant" && password === "1234") {
+          loginMessage.style.color = "green";
+          loginMessage.textContent = "Login successful ✔";
+
+          localStorage.setItem("user", JSON.stringify({
+            name: "John Doe",
+            email: "johndoe@example.com",
+            phone: "+237 699 123 456",
+            apartment: "A-12",
+            role: "Tenant"
+          }));
+
+          setTimeout(() => {
+            window.location.href = "index.html"; // redirect to home
+          }, 1000);
+        } else {
+          loginMessage.style.color = "red";
+          loginMessage.textContent = "Invalid username or password ❌";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

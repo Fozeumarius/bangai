@@ -1,0 +1,96 @@
+body {
+  background: #f4f6f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.login-container {
+  display: flex;
+  width: 800px;
+  height: 500px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.login-image {
+  flex: 1;
+}
+.login-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.login-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Stack labels + inputs vertically */
+.login-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Labels directly above inputs */
+.login-form label {
+  align-self: flex-start;
+  margin-left: 40px;   /* indent to match input start */
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.login-form input {
+  width: 220px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Button directly below inputs */
+.login-form .btn {
+  width: 220px;
+  padding: 10px;
+  background: #4facfe;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.login-form .btn:hover {
+  background: #00c6fb;
+}
+
+#loginMessage {
+  text-align: center;
+  font-weight: bold;
+}
+
+.signup-text {
+  margin-top: 1rem;
+  text-align: center;
+}
+.signup-text a {
+  color: #fe5e4f;
+  font-weight: bold;
+  text-decoration: none;
+}
+.signup-text a:hover {
+  text-decoration: underline;
+}

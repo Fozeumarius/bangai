@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="C:\Users\FOZEU\Desktop\projet\css\profile.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">
+      <a href="index.html"><img src="C:\Users\FOZEU\Desktop\projet\img\7.webp" alt="Apartment Logo"></a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="homepage.html">Home</a></li>
+      <li><a href="payments.html">Payments</a></li>
+      <li><a href="maintenance.html">Maintenance</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="index.html">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <h1>User Profile</h1>
+    <p>View and update your personal information.</p>
+  </header>
+
+  <!-- Profile Section -->
+  <section class="profile-section">
+    <div class="profile-card">
+      <div class="profile-image">
+        <img id="profilePic" src="profile-placeholder.png" alt="User Photo">
+        <input type="file" id="uploadPic" accept="image/*" style="display:none">
+        <button type="button" id="changePicBtn">Change Photo</button>
+      </div>
+      <div class="profile-info">
+        <h2 id="userName">John Doe</h2>
+        <p><strong>Email:</strong> <span id="userEmail">johndoe@example.com</span></p>
+        <p><strong>Phone:</strong> <span id="userPhone">+237 699 123 456</span></p>
+        <p><strong>Apartment:</strong> <span id="userApartment">A-12</span></p>
+        <p><strong>Role:</strong> <span id="userRole">Tenant</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Edit Profile Form -->
+  <section class="edit-profile">
+    <h2>Edit Your Information</h2>
+    <form id="editForm">
+      <label>Full Name:</label>
+      <input type="text" id="editName">
+
+      <label>Email:</label>
+      <input type="email" id="editEmail">
+
+      <label>Phone:</label>
+      <input type="text" id="editPhone">
+
+      <label>Apartment Number:</label>
+      <input type="text" id="editApartment">
+
+      <button type="submit">Save Changes</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Apartment Management System. All rights reserved.</p>
+  </footer>
+
+  <!-- Integrated JavaScript -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const profilePic = document.getElementById("profilePic");
+      const changeBtn = document.getElementById("changePicBtn");
+      const uploadInput = document.getElementById("uploadPic");
+
+      // Profile fields
+      const userName = document.getElementById("userName");
+      const userEmail = document.getElementById("userEmail");
+      const userPhone = document.getElementById("userPhone");
+      const userApartment = document.getElementById("userApartment");
+      const userRole = document.getElementById("userRole");
+
+      // Edit form
+      const editForm = document.getElementById("editForm");
+      const editName = document.getElementById("editName");
+      const editEmail = document.getElementById("editEmail");
+      const editPhone = document.getElementById("editPhone");
+      const editApartment = document.getElementById("editApartment");
+
+      // Load user data from localStorage or defaults
+      let user = JSON.parse(localStorage.getItem("user")) || {
+        name: "John Doe",
+        email: "johndoe@example.com",
+        phone: "+237 699 123 456",
+        apartment: "A-12",
+        role: "Tenant",
+        photo: "profile-placeholder.png"
+      };
+
+      function renderProfile() {
+        userName.textContent = user.name;
+        userEmail.textContent = user.email;
+        userPhone.textContent = user.phone;
+        userApartment.textContent = user.apartment;
+        userRole.textContent = user.role;
+        profilePic.src = user.photo;
+
+        // Fill edit form with current values
+        editName.value = user.name;
+        editEmail.value = user.email;
+        editPhone.value = user.phone;
+        editApartment.value = user.apartment;
+      }
+
+      // Handle photo change
+      changeBtn.addEventListener("click", () => {
+        uploadInput.click();
+      });
+
+      uploadInput.addEventListener("change", () => {
+        const file = uploadInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            user.photo = e.target.result;
+            localStorage.setItem("user", JSON.stringify(user));
+            renderProfile();
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Handle form submission
+      editForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        user.name = editName.value;
+        user.email = editEmail.value;
+        user.phone = editPhone.value;
+        user.apartment = editApartment.value;
+        localStorage.setItem("user", JSON.stringify(user));
+        renderProfile();
+      });
+
+      // Initial render
+      renderProfile();
+    });
+  </script>
+</body>
+</html>

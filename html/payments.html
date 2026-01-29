@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payments</title>
+  <link rel="stylesheet" href="C:\Users\FOZEU\Desktop\projet\css\payment.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">
+      <a href="index.html"><img src="C:\Users\FOZEU\Desktop\projet\img\7.webp" alt="Apartment Logo"></a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="homepage.html">Home</a></li>
+      <li><a href="payments.html">Payments</a></li>
+      <li><a href="maintenance.html">Maintenance</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="index.html">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <h1>Payments</h1>
+    <p>Manage your rent and track payment history.</p>
+  </header>
+
+  <!-- Current Payment Section -->
+  <section class="payment-section">
+    <h2>Current Rent</h2>
+    <div class="payment-card">
+      <p><strong>Apartment:</strong> A-12</p>
+      <p><strong>Tenant:</strong> FOZEU </p>
+      <p><strong>Amount Due:</strong> <span id="amountDue">150,000 FCFA</span></p>
+      <p><strong>Due Date:</strong> <span id="dueDate">31 January 2026</span></p>
+      <button class="btn" id="payBtn">Pay Now</button>
+    </div>
+  </section>
+
+  <!-- Payment History Section -->
+  <section class="payment-history">
+    <h2>Payment History</h2>
+    <table id="historyTable">
+      <tr>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Status</th>
+      </tr>
+      <!-- Past payments will be added here dynamically -->
+    </table>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Apartment Management System. All rights reserved.</p>
+  </footer>
+
+  <!-- Integrated JavaScript -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const payBtn = document.getElementById("payBtn");
+      const amountDue = document.getElementById("amountDue");
+      const dueDate = document.getElementById("dueDate");
+      const historyTable = document.getElementById("historyTable");
+
+      payBtn.addEventListener("click", () => {
+        // Get current values
+        const amount = amountDue.textContent;
+        const date = new Date().toLocaleDateString();
+
+        // Add to history table
+        const newRow = historyTable.insertRow(-1);
+        newRow.innerHTML = `
+          <td>${date}</td>
+          <td>${amount}</td>
+          <td style="color:green;">Paid</td>
+        `;
+
+        // Update current payment section
+        amountDue.textContent = "0 FCFA";
+        dueDate.textContent = "No payment due";
+        payBtn.disabled = true;
+        payBtn.textContent = "Paid ✔";
+      });
+    });
+  </script>
+</body>
+</html>

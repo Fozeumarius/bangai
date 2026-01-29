@@ -1,0 +1,124 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Body */
+body {
+  background: #f4f6f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Navigation Bar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #4facfe;
+  padding: 1rem 2rem;
+}
+
+.navbar .logo img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;   /* Circular logo */
+  object-fit: cover;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-links li a:hover {
+  text-decoration: underline;
+}
+
+/* Page Header */
+.page-header {
+  text-align: center;
+  padding: 2rem;
+  background: #f0f8ff;
+}
+
+.page-header h1 {
+  margin-bottom: 0.5rem;
+}
+
+/* Payment Section */
+.payment-section {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.payment-card p {
+  margin: 0.5rem 0;
+}
+
+.payment-card .btn {
+  margin-top: 1rem;
+  padding: 10px 15px;
+  background: #4facfe;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.payment-card .btn:hover {
+  background: #00c6fb;
+}
+
+/* Payment History */
+.payment-history {
+  max-width: 800px;
+  margin: 2rem auto;
+  background: #f9f9f9;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.payment-history table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.payment-history th, .payment-history td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.payment-history th {
+  background: #4facfe;
+  color: white;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #4facfe;
+  color: white;
+  margin-top: 2rem;
+}
+
+footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}

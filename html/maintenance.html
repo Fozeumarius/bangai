@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Maintenance Requests</title>
+  <link rel="stylesheet" href="C:\Users\FOZEU\Desktop\projet\css\maintenance.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">
+      <a href="homepage.html"><img src="C:\Users\FOZEU\Desktop\projet\img\7.webp" alt="Apartment Logo"></a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="homepage.html">Home</a></li>
+      <li><a href="payments.html">Payments</a></li>
+      <li><a href="maintenance.html">Maintenance</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="index.html">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Title -->
+  <header class="page-header">
+    <h1>Maintenance Requests</h1>
+    <p>Submit issues and track their progress.</p>
+  </header>
+
+  <!-- Request Form -->
+  
+
+  <!-- Tenant Requests -->
+  <section class="request-form">
+  <h2>Submit a New Request</h2>
+  <form id="maintenanceForm">
+    <label>Issue Title:</label>
+    <input type="text" id="issueTitle" required>
+
+    <label>Description:</label>
+    <textarea id="issueDesc" required></textarea>
+
+    <label>Apartment Number:</label>
+    <input type="text" id="apartmentNum" required>
+
+    <label>Urgency:</label>
+    <select id="urgency">
+      <option>Low</option>
+      <option>Medium</option>
+      <option>High</option>
+    </select>
+
+    <button type="submit">Submit Request</button>
+  </form>
+</section>
+
+<!-- Tenant Requests -->
+<section class="tenant-requests">
+  <h2>Your Requests</h2>
+  <table id="tenantTable">
+    <tr>
+      <th>Issue</th>
+      <th>Description</th>
+      <th>Apartment</th>
+      <th>Urgency</th>
+      
+    </tr>
+    <!-- Rows will be added dynamically -->
+  </table>
+</section>
+
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Apartment Management System. All rights reserved.</p>
+  </footer>
+</body>
+</html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Your JavaScript code here
+    console.log("Maintenance page loaded!");
+  });
+  document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("maintenanceForm");
+  const tenantTable = document.getElementById("tenantTable");
+
+  // Load saved requests from localStorage
+  let requests = JSON.parse(localStorage.getItem("requests")) || [];
+
+  // Function to render requests in table
+  function renderRequests() {
+    // Clear old rows (keep header)
+    tenantTable.innerHTML = `
+      <tr>
+        <th>Issue</th>
+        <th>Description</th>
+        <th>Apartment</th>
+        <th>Urgency</th>
+        
+      </tr>
+    `;
+
+    requests.forEach((req, index) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${req.title}</td>
+        <td>${req.desc}</td>
+        <td>${req.apartment}</td>
+        <td>${req.urgency}</td>
+        <td>
+          
+      `
+    });
+
+    // Add event listeners for status changes
+    document.querySelectorAll(".statusSelect").forEach(select => {
+      select.addEventListener("change", (e) => {
+        const idx = e.target.dataset.index;
+        requests[idx].status = e.target.value;
+        localStorage.setItem("requests", JSON.stringify(requests));
+      });
+    });
+  }
+
+  // Handle form submission
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const newRequest = {
+      title: document.getElementById("issueTitle").value,
+      desc: document.getElementById("issueDesc").value,
+      apartment: document.getElementById("apartmentNum").value,
+      urgency: document.getElementById("urgency").value
+    };
+
+    requests.push(newRequest);
+    localStorage.setItem("requests", JSON.stringify(requests));
+    renderRequests();
+    form.reset();
+  });
+
+  // Initial render
+  renderRequests();
+});
+
+</script>
