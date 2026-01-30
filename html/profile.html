@@ -9,7 +9,7 @@
   <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="logo">
-      <a href="index.html"><img src="C:\Users\FOZEU\Bangai\projet\img\7.webp" alt="Apartment Logo"></a>
+<a href="index.html"><img src="../img/7.webp" alt="Apartment Logo"></a>
     </div>
     <ul class="nav-links">
       <li><a href="homepage.html">Home</a></li>
@@ -71,82 +71,83 @@
 
   <!-- Integrated JavaScript -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const profilePic = document.getElementById("profilePic");
-      const changeBtn = document.getElementById("changePicBtn");
-      const uploadInput = document.getElementById("uploadPic");
+    
+  document.addEventListener("DOMContentLoaded", () => {
+    const profilePic = document.getElementById("profilePic");
+    const changeBtn = document.getElementById("changePicBtn");
+    const uploadInput = document.getElementById("uploadPic");
 
-      // Profile fields
-      const userName = document.getElementById("userName");
-      const userEmail = document.getElementById("userEmail");
-      const userPhone = document.getElementById("userPhone");
-      const userApartment = document.getElementById("userApartment");
-      const userRole = document.getElementById("userRole");
+    // Profile fields
+    const userName = document.getElementById("userName");
+    const userEmail = document.getElementById("userEmail");
+    const userPhone = document.getElementById("userPhone");
+    const userApartment = document.getElementById("userApartment");
 
-      // Edit form
-      const editForm = document.getElementById("editForm");
-      const editName = document.getElementById("editName");
-      const editEmail = document.getElementById("editEmail");
-      const editPhone = document.getElementById("editPhone");
-      const editApartment = document.getElementById("editApartment");
+    // Edit form
+    const editForm = document.getElementById("editForm");
+    const editName = document.getElementById("editName");
+    const editEmail = document.getElementById("editEmail");
+    const editPhone = document.getElementById("editPhone");
+    const editApartment = document.getElementById("editApartment");
 
-      // Load user data from localStorage or defaults
-      let user = JSON.parse(localStorage.getItem("user")) || {
-        name: "John Doe",
-        email: "johndoe@example.com",
-        phone: "+237 699 123 456",
-        apartment: "A-12",
-        role: "Tenant",
-        photo: "profile-placeholder.png"
-      };
+    // Load user data if it exists
+    let user = JSON.parse(localStorage.getItem("user")) || null;
+    const savedPhoto = localStorage.getItem("profilePhoto");
 
-      function renderProfile() {
+    function displayUser() {
+      if (user) {
         userName.textContent = user.name;
         userEmail.textContent = user.email;
         userPhone.textContent = user.phone;
         userApartment.textContent = user.apartment;
-        userRole.textContent = user.role;
-        profilePic.src = user.photo;
-
-        // Fill edit form with current values
-        editName.value = user.name;
-        editEmail.value = user.email;
-        editPhone.value = user.phone;
-        editApartment.value = user.apartment;
+      } else {
+        userName.textContent = "No information yet";
+        userEmail.textContent = "";
+        userPhone.textContent = "";
+        userApartment.textContent = "";
       }
 
-      // Handle photo change
-      changeBtn.addEventListener("click", () => {
-        uploadInput.click();
-      });
+      if (savedPhoto) {
+        profilePic.src = savedPhoto;
+      }
+    }
 
-      uploadInput.addEventListener("change", () => {
-        const file = uploadInput.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            user.photo = e.target.result;
-            localStorage.setItem("user", JSON.stringify(user));
-            renderProfile();
-          };
-          reader.readAsDataURL(file);
-        }
-      });
+    displayUser();
 
-      // Handle form submission
-      editForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        user.name = editName.value;
-        user.email = editEmail.value;
-        user.phone = editPhone.value;
-        user.apartment = editApartment.value;
-        localStorage.setItem("user", JSON.stringify(user));
-        renderProfile();
-      });
-
-      // Initial render
-      renderProfile();
+    // Save form data
+    editForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      user = {
+        name: editName.value,
+        email: editEmail.value,
+        phone: editPhone.value,
+        apartment: editApartment.value
+      };
+      localStorage.setItem("user", JSON.stringify(user));
+      displayUser();
+      editForm.reset();
     });
+
+    // Change photo logic
+    changeBtn.addEventListener("click", () => {
+      uploadInput.click();
+    });
+
+    uploadInput.addEventListener("change", () => {
+      const file = uploadInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          profilePic.src = reader.result;
+          localStorage.setItem("profilePhoto", reader.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  });
+</script>
+
+
   </script>
 </body>
 </html>
