@@ -32,24 +32,69 @@
     <div class="payment-card">
       <p><strong>Apartment:</strong> A-12</p>
       <p><strong>Tenant:</strong> FOZEU </p>
-      <p><strong>Amount Due:</strong> <span id="amountDue">150,000 FCFA</span></p>
       <p><strong>Due Date:</strong> <span id="dueDate">31 January 2026</span></p>
+
+      <!-- User Inputs -->
+      <label for="accountName">Account Name:</label>
+      <input type="text" id="accountName" placeholder="Enter your name" required>
+
+      <label for="accountNumber">Account Number / Phone:</label>
+      <input type="text" id="accountNumber" placeholder="Enter your number" required>
+
+      <label for="amountInput">Amount (FCFA):</label>
+      <input type="number" id="amountInput" placeholder="Enter amount" required>
+
+      <!-- Payment Method Selection -->
+      <!-- Payment Method Selection -->
+<label for="paymentMethod">Choose Payment Method:</label>
+<select id="paymentMethod" class="payment-method">
+  <option value="mtn" class="mtn">MTN Mobile Money</option>
+  <option value="orange" class="orange">Orange Money</option>
+</select>
+
+
       <button class="btn" id="payBtn">Pay Now</button>
     </div>
   </section>
-
   <!-- Payment History Section -->
-  <section class="payment-history">
-    <h2>Payment History</h2>
-    <table id="historyTable">
+<section class="payment-history">
+  <h2>Payment History</h2>
+  <table id="historyTable">
+    <thead>
       <tr>
         <th>Date</th>
+        <th>Account</th>
         <th>Amount</th>
+        <th>Payment Mode</th>
         <th>Status</th>
       </tr>
-      <!-- Past payments will be added here dynamically -->
-    </table>
-  </section>
+    </thead>
+    <tbody>
+      <!-- Les paiements passés seront ajoutés ici dynamiquement -->
+      <tr>
+        <td>01/02/2026</td>
+        <td>FOZEU (670000000)</td>
+        <td>50,000 FCFA</td>
+        <td><span class="status mtn">Paid via MTN</span></td>
+        <td><span class="status paid">Paid ✔</span></td>
+      </tr>
+      <tr>
+        <td>15/01/2026</td>
+        <td>FOZEU (670000000)</td>
+        <td>50,000 FCFA</td>
+        <td><span class="status orange">Paid via Orange</span></td>
+        <td><span class="status late">Late ✖</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+
+  <!-- Notification Popup -->
+  <div id="popup" class="popup"></div>
+
+  <!-- Payment History Section -->
+  
 
   <!-- Footer -->
   <footer>
@@ -60,28 +105,68 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const payBtn = document.getElementById("payBtn");
-      const amountDue = document.getElementById("amountDue");
       const dueDate = document.getElementById("dueDate");
       const historyTable = document.getElementById("historyTable");
+      const popup = document.getElementById("popup");
 
-      payBtn.addEventListener("click", () => {
-        // Get current values
-        const amount = amountDue.textContent;
+      // Popup function
+      function showPopup(message, type="success") {
+  popup.textContent = message;
+  popup.className = "popup " + type;
+  popup.style.display = "flex";
+  popup.style.opacity = "1";
+  popup.style.animation = "slideIn 0.4s ease";
+
+  // Hide after 8 seconds (instead of 3)
+  setTimeout(() => {
+    popup.style.opacity = "0";
+    setTimeout(() => { popup.style.display = "none"; }, 500);
+  }, 8000);
+}
+
+
+      payBtn.addEventListener("click", async () => {
+        const accountName = document.getElementById("accountName").value.trim();
+        const accountNumber = document.getElementById("accountNumber").value.trim();
+        const amount = document.getElementById("amountInput").value.trim();
+        const method = document.getElementById("paymentMethod").value;
         const date = new Date().toLocaleDateString();
 
-        // Add to history table
-        const newRow = historyTable.insertRow(-1);
-        newRow.innerHTML = `
-          <td>${date}</td>
-          <td>${amount}</td>
-          <td style="color:green;">Paid</td>
-        `;
+        if (!accountName || !accountNumber || !amount) {
+          showPopup("❌ Please fill in all fields before proceeding.", "error");
+          return;
+        }
 
-        // Update current payment section
-        amountDue.textContent = "0 FCFA";
-        dueDate.textContent = "No payment due";
-        payBtn.disabled = true;
-        payBtn.textContent = "Paid ✔";
+        try {
+          // Show processing popup
+          showPopup(`Processing ${method.toUpperCase()} payment of ${amount} FCFA for ${accountName} (${accountNumber})...`, "success");
+
+          // Show confirmation popup after 1.5s
+          setTimeout(() => {
+            showPopup("✅ A notification will be sent to your phone number or email confirming your payment has been received and accepted.", "success");
+          }, 1500);
+
+          // Add to history table
+          const newRow = historyTable.insertRow(-1);
+          newRow.innerHTML = `
+            <td>${date}</td>
+            <td>${accountName} (${accountNumber})</td>
+            <td>${amount} FCFA</td>
+            <td style="color:green;">Paid via ${method.toUpperCase()}</td>
+          `;
+
+          // Reset form
+          document.getElementById("accountName").value = "";
+          document.getElementById("accountNumber").value = "";
+          document.getElementById("amountInput").value = "";
+          payBtn.disabled = true;
+          payBtn.textContent = "Paid ✔";
+          dueDate.textContent = "No payment due";
+
+        } catch (error) {
+          showPopup("❌ Payment failed. Please try again.", "error");
+          console.error(error);
+        }
       });
     });
   </script>
