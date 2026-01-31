@@ -219,17 +219,17 @@ body {
   color: #fff;
 }
 
-.status.mtn { background-color: #ffcc00; /* Jaune vif */ color: #333; 
-  /* Texte foncé pour contraste */ 
-} /* Orange Money → Orange */ 
+.status.mtn { background-color: #ffcc00;  color: #333; 
+  
+}  
 .status.orange { background-color: #ff6600; 
-  /* Orange vif */ color: #fff; 
+   color: #fff; 
 }
 .payment-method option.mtn { background-color: #ffcc00; 
-  /* Jaune vif */ color: #333;
-   /* Texte foncé pour contraste */ 
+ color: #333;
+  
   } 
-   /* Orange Money → Orange */ 
+    
    .payment-method option.orange { background-color: #ff6600;
-   /* Orange vif */ color: #fff; 
+    color: #fff; 
   }
