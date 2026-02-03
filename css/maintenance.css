@@ -66,6 +66,7 @@ table th {
 table tr:nth-child(even) {
   background: #f9f9f9;
 }
+
 /* Navigation Bar */
 .navbar {
   display: flex;
@@ -73,8 +74,6 @@ table tr:nth-child(even) {
   align-items: center;
   background: #4facfe;
   padding: 1rem 2rem;
-  
-
 }
 
 .navbar .logo img {
@@ -88,8 +87,6 @@ table tr:nth-child(even) {
   list-style: none;
   display: flex;
   gap: 1.1rem;
-  
-  
 }
 
 .nav-links li a {
@@ -102,14 +99,6 @@ table tr:nth-child(even) {
   text-decoration: underline;
 }
 
-/* Page Header */
-
-.page-header {
-  text-align: center;
-  padding: 2rem;
-  background: #f0f8ff;
-}
-/* Login Button Style */
 /* Login Button Style */
 .login-btn {
   background: #ffeb3b;       
@@ -127,6 +116,7 @@ table tr:nth-child(even) {
   box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
 }
 
+/* Footer */
 footer {
   text-align: center;
   padding: 1rem;
@@ -140,3 +130,47 @@ footer p {
   font-size: 0.9rem;
 }
 
+/* Popup Notification */
+.popup {
+  display: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  max-width: 350px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.popup.success {
+  border-left: 6px solid #4caf50;
+  color: #333;
+}
+
+.popup.error {
+  border-left: 6px solid #ef5350;
+  color: #333;
+}
+
+.popup.success::before {
+  content: "✔";
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #4caf50;
+}
+
+.popup.error::before {
+  content: "✖";
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #ef5350;
+}
