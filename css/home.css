@@ -20,27 +20,50 @@ body {
   align-items: center;
   background: #4facfe;
   padding: 1rem 2rem;
+  
+
 }
 
 .navbar .logo img {
-  height: 50px;              /* Increased size */
-  width: 50px;
-  border-radius: 50%;        /* Circular logo */
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;   /* Circular logo */
   object-fit: cover;
 }
 
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 1.2rem;               /* Slightly wider spacing */
+  gap: 1.1rem;
+  
+  
 }
 
 .nav-links li a {
   color: white;
   text-decoration: none;
-  font-weight: 600;          /* Slightly bolder */
-  font-size: 1.1rem;         /* Increased size */
+  font-weight: 800;
 }
+
+.nav-links li a:hover {
+  text-decoration: underline;
+}
+.login-btn {
+  background: #ffeb3b;       
+  color: #333;               
+  font-weight: 800;          
+  padding: 8px 16px;         
+  border-radius: 6px;        
+  text-decoration: none;     
+  transition: all 0.3s ease; 
+}
+
+.login-btn:hover {
+  background: #fdd835;       
+  color: #000;              
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+}
+
 
 .nav-links li a:hover {
   text-decoration: underline;

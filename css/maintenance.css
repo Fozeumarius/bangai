@@ -73,6 +73,8 @@ table tr:nth-child(even) {
   align-items: center;
   background: #4facfe;
   padding: 1rem 2rem;
+  
+
 }
 
 .navbar .logo img {
@@ -85,19 +87,46 @@ table tr:nth-child(even) {
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 1rem;
+  gap: 1.1rem;
+  
+  
 }
 
 .nav-links li a {
   color: white;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 800;
 }
 
 .nav-links li a:hover {
   text-decoration: underline;
 }
-/* Footer */
+
+/* Page Header */
+
+.page-header {
+  text-align: center;
+  padding: 2rem;
+  background: #f0f8ff;
+}
+/* Login Button Style */
+/* Login Button Style */
+.login-btn {
+  background: #ffeb3b;       
+  color: #333;               
+  font-weight: 700;          
+  padding: 8px 16px;         
+  border-radius: 6px;        
+  text-decoration: none;     
+  transition: all 0.3s ease; 
+}
+
+.login-btn:hover {
+  background: #fdd835;       
+  color: #000;              
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+}
+
 footer {
   text-align: center;
   padding: 1rem;

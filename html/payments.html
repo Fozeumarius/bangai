@@ -16,7 +16,9 @@
       <li><a href="payments.html">Payments</a></li>
       <li><a href="maintenance.html">Maintenance</a></li>
       <li><a href="profile.html">Profile</a></li>
-      <li><a href="index.html">Login</a></li>
+      <li><a href="index.html" class="login-btn">Login</a></li>
+
+
     </ul>
   </nav>
 
@@ -30,9 +32,9 @@
   <section class="payment-section">
     <h2>Current Rent</h2>
     <div class="payment-card">
-      <p><strong>Apartment:</strong> A-12</p>
-      <p><strong>Tenant:</strong> FOZEU </p>
-      <p><strong>Due Date:</strong> <span id="dueDate">31 January 2026</span></p>
+      <p><strong>Apartment:</strong> </p>
+      <p><strong>Tenant:</strong>  </p>
+      <p><strong>Due Date:</strong> <span id="dueDate"></span></p>
 
       <!-- User Inputs -->
       <label for="accountName">Account Name:</label>
@@ -70,7 +72,7 @@
       </tr>
     </thead>
     <tbody>
-      <!-- Les paiements passés seront ajoutés ici dynamiquement -->
+      
       <tr>
         <td>01/02/2026</td>
         <td>FOZEU (670000000)</td>
@@ -113,7 +115,7 @@
   popup.style.opacity = "1";
   popup.style.animation = "slideIn 0.4s ease";
 
-  // Hide after 8 seconds (instead of 3)
+  // Hide after 8 seconds 
   setTimeout(() => {
     popup.style.opacity = "0";
     setTimeout(() => { popup.style.display = "none"; }, 500);
@@ -139,7 +141,7 @@
 
           // Show confirmation popup after 1.5s
           setTimeout(() => {
-            showPopup("✅ A notification will be sent to your phone number or email confirming your payment has been received and accepted.", "success");
+            showPopup("✅ A notification will be sent to you confirming your payment has been received and accepted.", "success");
           }, 1500);
 
           // Add to history table
