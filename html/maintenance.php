@@ -12,17 +12,17 @@
       <a href="homepage.html"><img src="../img/7.webp" alt="Apartment Logo"></a>
     </div>
     <ul class="nav-links">
-      <li><a href="homepage.html">Home</a></li>
-      <li><a href="payments.html">Payments</a></li>
-      <li><a href="maintenance.html">Maintenance</a></li>
-      <li><a href="profile.html">Profile</a></li>
-      <li><a href="index.html" class="login-btn">Login</a></li>
+      <li><a href="homepage.php">Home</a></li>
+      <li><a href="payments.php">Payments</a></li>
+      <li><a href="maintenance.php">Maintenance</a></li>
+      <li><a href="profile.php">Profile</a></li>
+      <li><a href="index.php" class="login-btn">Login</a></li>
     </ul>
   </nav>
 
   <!-- Page Title -->
   <header class="page-header">
-    <h1>Maintenance Requests</h1>
+    <h1>MAINTENANCE REQUEST</h1>
     <p>Submit issues and track their progress.</p>
   </header>
 

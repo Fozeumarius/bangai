@@ -15,15 +15,15 @@
       <li><a href="homepage.html">Home</a></li>
       <li><a href="payments.html">Payments</a></li>
       <li><a href="maintenance.html">Maintenance</a></li>
-      <li><a href="profile.html">Profile</a></li>
+      <li><a href="profile.html" class="active">Profile</a></li>
       <li><a href="index.html" class="login-btn">Login</a></li>
     </ul>
   </nav>
 
   <!-- Page Header -->
   <header class="page-header">
-    <h1>User Profile</h1>
-    <p>View and update your personal information.</p>
+    <h1>USER PROFILE</h1>
+    <p>View and update your personal informations.</p>
   </header>
 
   <!-- Profile Section -->
