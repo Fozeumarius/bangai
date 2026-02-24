@@ -25,7 +25,7 @@ if (!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin') {
     <ul class="nav-links">
       <li><a href="dashboard.php" class="active">Dashboard</a></li>
       <li><a href="manage_users.php">Users</a></li>
-      <li><a href="manage_payments.php">Payments</a></li>
+      <li><a href="manage_payment.php">Payments</a></li>
       <li><a href="manage_maintenance.php">Maintenance</a></li>
       <li><a href="logout.php" class="logout-btn">Logout</a></li>
     </ul>
@@ -41,30 +41,31 @@ if (!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin') {
 
   <!-- Dashboard Cards -->
   <section class="dashboard">
-    <h2>Quick Actions</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Manage Users</h3>
-        <p>View, add, or update tenant accounts.</p>
-        <a href="manage_users.php" class="btn">Go</a>
-      </div>
-      <div class="card">
-        <h3>Payments</h3>
-        <p>Track rent and utility payments.</p>
-        <a href="manage_payments.php" class="btn">Go</a>
-      </div>
-      <div class="card">
-        <h3>Maintenance</h3>
-        <p>Review and assign maintenance requests.</p>
-        <a href="manage_maintenance.php" class="btn">Go</a>
-      </div>
-      <div class="card">
-        <h3>Reports</h3>
-        <p>Generate monthly or annual reports.</p>
-        <a href="reports.php" class="btn">Go</a>
-      </div>
+  <h2>Quick Actions</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Manage Users</h3>
+      <p>View, add, or update tenant accounts.</p>
+      <button class="btn" onclick="location.href='manage_users.php'">Users</button>
     </div>
-  </section>
+    <div class="card">
+      <h3>Manage Payments</h3>
+      <p>Verify and track rent and utility payments.</p>
+      <button class="btn" onclick="location.href='manage_payment.php'">Payments</button>
+    </div>
+    <div class="card">
+      <h3>Manage Maintenance</h3>
+      <p>Review and assign maintenance requests.</p>
+      <button class="btn" onclick="location.href='manage_maintenance.php'">maintenace</button>
+    </div>
+    <div class="card">
+      <h3>Manage Reports</h3>
+      <p>Generate monthly or annual reports.</p>
+      <button class="btn" onclick="location.href='reports.php'">Reports</button>
+    </div>
+  </div>
+</section>
+
 
   <!-- Footer -->
   <footer>

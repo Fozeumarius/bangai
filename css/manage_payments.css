@@ -1,0 +1,139 @@
+/* General page styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f6f9;
+  color: #333;
+}
+
+/* Sidebar styling */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 220px;
+  background: #2c3e50;
+  color: #fff;
+  padding-top: 20px;
+  box-shadow: 2px 0 6px rgba(0,0,0,0.1);
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 20px;
+  color: #ecf0f1;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+  display: block;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.sidebar ul li a:hover {
+  background: #34495e;
+}
+
+/* Main content area */
+.main-content {
+  margin-left: 240px; /* space for sidebar */
+  padding: 20px;
+}
+
+/* Page title */
+h2 {
+  text-align: center;
+  margin: 30px 0 20px;
+  color: #2c3e50;
+}
+
+/* Payments table */
+table {
+  border-collapse: collapse;
+  width: 90%;
+  margin: auto;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+th {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Action links */
+a[href*="edit_payment"],
+a[href*="delete_payment"] {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  margin: 0 4px;
+}
+
+a[href*="edit_payment"] {
+  background-color: #28a745;
+  color: #fff;
+}
+
+a[href*="delete_payment"] {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+a[href*="edit_payment"]:hover,
+a[href*="delete_payment"]:hover {
+  opacity: 0.85;
+}
+
+/* General button style */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.btn:hover {
+  background: #2980b9;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #2c3e50;
+  color: #fff;
+  margin-top: 40px;
+}
