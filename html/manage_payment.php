@@ -8,7 +8,7 @@ if ($conn->connect_error) {
 }
 
 // fetch all payments
-$result = $conn->query("SELECT id, user_id, amount, payment_date, status FROM payments");
+$result = $conn->query("SELECT id, user_id, account_number, account_name, amount, payment_date, status FROM payments");
 ?>
 
 <!DOCTYPE html>

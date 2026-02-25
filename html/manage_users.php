@@ -8,7 +8,7 @@ if ($conn->connect_error) {
 }
 
 // fetch all users
-$result = $conn->query("SELECT id, ADMIN, email, role FROM users");
+$result = $conn->query("SELECT id, username, email, role FROM users");
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +46,7 @@ $result = $conn->query("SELECT id, ADMIN, email, role FROM users");
             <?php while($row = $result->fetch_assoc()) { ?>
             <tr>
                 <td><?= $row['id'] ?></td>
-                <td><?= $row['ADMIN'] ?></td>
+                <td><?= $row['username'] ?></td>
                 <td><?= $row['email'] ?></td>
                 <td><?= $row['role'] ?></td>
                 <td>

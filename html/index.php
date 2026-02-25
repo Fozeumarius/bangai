@@ -25,6 +25,9 @@ $stmt->execute();
         // Verify password (assuming hashed in DB)
         if (password_verify($password, $row['password'])) {
             $_SESSION['username'] = $username;
+            $_SESSION['user_id'] = $row['id'];   // store the user’s id
+            $_SESSION['username'] = $row['username'];
+
 
             // Redirect based on who is logging in
             // Replace "admin1" with your actual manager username or email
