@@ -8,8 +8,13 @@ if ($conn->connect_error) {
 }
 
 // fetch all payments
+
 $result = $conn->query("SELECT id, user_id, account_number, account_name, amount, payment_date, status FROM payments");
-?>
+ if (!empty($_GET['msg'])) { ?>
+    <p style="color:green"><?= htmlspecialchars($_GET['msg']) ?></p>
+<?php } ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -28,7 +33,7 @@ $result = $conn->query("SELECT id, user_id, account_number, account_name, amount
             <li><a href="manage_users.php">Manage Users</a></li>
             <li><a href="manage_payment.php">Manage Payments</a></li>
             <li><a href="manage_maintenance.php">Manage Maintenance</a></li>
-            <li><a href="reports.php">Reports</a></li>
+            <li><a href="reports.php">Manage Reports</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </div>
@@ -53,7 +58,6 @@ $result = $conn->query("SELECT id, user_id, account_number, account_name, amount
                 <td><?= $row['payment_date'] ?></td>
                 <td><?= $row['status'] ?></td>
                 <td>
-                    <a href="edit_payment.php?id=<?= $row['id'] ?>">Edit</a> |
                     <a href="delete_payment.php?id=<?= $row['id'] ?>" onclick="return confirm('Delete this payment?')">Delete</a>
                 </td>
             </tr>

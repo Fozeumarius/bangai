@@ -42,7 +42,7 @@ $perUser = $conn->query("
             <li><a href="manage_users.php">Manage Users</a></li>
             <li><a href="manage_payment.php">Manage Payments</a></li>
             <li><a href="manage_maintenance.php">Manage Maintenance</a></li>
-            <li><a href="reports.php">Reports</a></li>
+            <li><a href="reports.php">Manage Reports</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </div>

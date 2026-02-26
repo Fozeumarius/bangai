@@ -11,6 +11,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-weight: bold;
 }
 
 .navbar .logo img {
@@ -30,10 +31,12 @@ body {
 }
 
 .hero {
-  background: url('../img/1.jpg') center/cover no-repeat;
+  background: url('../img/n2.jpg') center/cover no-repeat;
   color: #feffff;
   text-align: center;
   padding: 60px 20px;
+  font-size: 2em;
+  font-weight: bold;
 }
 
 .dashboard {

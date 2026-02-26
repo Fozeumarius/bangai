@@ -14,6 +14,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
 }
 
 .navbar .logo {
@@ -136,6 +137,7 @@ footer {
   color: #fff;
   padding-top: 20px;
   box-shadow: 2px 0 6px rgba(0,0,0,0.1);
+  font-weight: bold;
 }
 
 .sidebar h2 {

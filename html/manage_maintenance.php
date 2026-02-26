@@ -17,7 +17,7 @@ $result = $conn->query("SELECT id, request, description, apartment, urgency, req
       <li><a href="manage_users.php">Manage Users</a></li>
       <li><a href="manage_payment.php">Manage Payments</a></li>
       <li><a href="manage_maintenance.php">Manage Maintenance</a></li>
-      <li><a href="reports.php">Reports</a></li>
+      <li><a href="reports.php">Manage Reports</a></li>
       <li><a href="logout.php">Logout</a></li>
     </ul>
   </div>
@@ -28,6 +28,10 @@ $result = $conn->query("SELECT id, request, description, apartment, urgency, req
     <?php if (isset($_GET['success'])): ?>
       <p style="color: green; text-align: center;">Request submitted successfully!</p>
     <?php endif; ?>
+    <?php if (!empty($_GET['msg'])) { ?>
+    <p style="color:green"><?= htmlspecialchars($_GET['msg']) ?></p>
+<?php } ?>
+
 
     <table>
       <tr>

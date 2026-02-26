@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (!empty($_SESSION['profile_message'])) {
+    echo "<p style='color:green'>" . $_SESSION['profile_message'] . "</p>";
+    unset($_SESSION['profile_message']); // clear message after showing
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

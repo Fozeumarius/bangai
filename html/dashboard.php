@@ -19,16 +19,16 @@ if (!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin') {
   <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="logo">
-      <img src="../img/7.webp" alt="Apartment Logo">
-      <span>Bangue Manager</span>
+      
+      <span>Bangue Management</span>
     </div>
     <ul class="nav-links">
       <li><a href="dashboard.php" class="active">Dashboard</a></li>
       <li><a href="manage_users.php">Users</a></li>
       <li><a href="manage_payment.php">Payments</a></li>
       <li><a href="manage_maintenance.php">Maintenance</a></li>
-      <li><a href="reports.php">Maintenance</a></li>
-      <li><a href="logout.php" class="logout-btn">Logout</a></li>
+      <li><a href="reports.php">Reports</a></li>
+      <a href="logout.php" class="logout-btn">Logout</a>
     </ul>
   </nav>
 
