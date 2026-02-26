@@ -35,7 +35,7 @@ form input, form textarea, form select {
 form button {
   margin-top: 1.5rem;
   padding: 10px 15px;
-  background: #4facfe;
+  background: #2c3e50;
   border: none;
   border-radius: 5px;
   color: white;
@@ -43,7 +43,7 @@ form button {
 }
 
 form button:hover {
-  background: #00c6fb;
+  background: #2c3e50;
 }
 
 table {
@@ -59,7 +59,7 @@ table th, table td {
 }
 
 table th {
-  background: #4facfe;
+  background: #2c3e50;
   color: white;
 }
 
@@ -72,7 +72,7 @@ table tr:nth-child(even) {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #4facfe;
+  background: #2c3e50;
   padding: 1rem 2rem;
 }
 
@@ -101,7 +101,7 @@ table tr:nth-child(even) {
 
 /* Login Button Style */
 .login-btn {
-  background: #ffeb3b;       
+  background: #f0e8a1;       
   color: #333;               
   font-weight: 700;          
   padding: 8px 16px;         
@@ -111,7 +111,7 @@ table tr:nth-child(even) {
 }
 
 .login-btn:hover {
-  background: #fdd835;       
+  background: #dcc455;       
   color: #000;              
   box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
 }
@@ -120,7 +120,7 @@ table tr:nth-child(even) {
 footer {
   text-align: center;
   padding: 1rem;
-  background: #4facfe;   /* Same color as nav bar */
+  background: #2c3e50;   /* Same color as nav bar */
   color: white;
   margin-top: 2rem;
 }

@@ -18,11 +18,11 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #4facfe;
+  background: #2c3e50;
   padding: 1rem 2rem;
 }
 .login-btn {
-  background: #ffeb3b;       
+  background: #f0e8a1;       
   color: #333;               
   font-weight: 800;          
   padding: 8px 16px;         
@@ -32,7 +32,7 @@ body {
 }
 
 .login-btn:hover {
-  background: #fdd835;       
+  background: #dcc455;       
   color: #000;              
   box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
 }
@@ -100,7 +100,7 @@ form input, form textarea, form select {
 form button {
   margin-top: 1.5rem;
   padding: 10px 15px;
-  background: #4facfe;
+  background: #2c3e50;
   border: none;
   border-radius: 5px;
   color: white;
@@ -108,7 +108,7 @@ form button {
 }
 
 form button:hover {
-  background: #00c6fb;
+  background: #2c3e50;
 }
 
 /* Tables */
@@ -125,7 +125,7 @@ table th, table td {
 }
 
 table th {
-  background: #4facfe;
+  background: #2c3e50;
   color: white;
 }
 
@@ -145,14 +145,14 @@ table tr:nth-child(even) {
   width: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #4facfe;
+  border: 3px solid #2c3e50;
 }
 
 /* Change Photo Button */
 #changePicBtn {
   margin-top: 1rem;
   padding: 10px 15px;
-  background: #4facfe;
+  background: #2c3e50;
   border: none;
   border-radius: 5px;
   color: white;
@@ -162,7 +162,7 @@ table tr:nth-child(even) {
 }
 
 #changePicBtn:hover {
-  background: #00c6fb;
+  background: #2c3e50;
 }
 
 .profile-info h2 {
@@ -178,7 +178,7 @@ table tr:nth-child(even) {
 footer {
   text-align: center;
   padding: 1rem;
-  background: #4facfe;
+  background: #2c3e50;
   color: white;
   margin-top: 2rem;
 }
