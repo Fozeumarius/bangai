@@ -73,8 +73,10 @@ body {
 /* Hero Section */
 .hero {
   position: relative;
-  height: 650px;             /* Increased height */
+  height: 400px;             /* Increased height */
   background: url("../img/1.jpg") no-repeat center center/cover;
+  font-weight: bold;
+  font-size: 26px;
 }
 
 .hero::after {
@@ -93,10 +95,11 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: white;
+  color: rgb(253, 251, 251);
   z-index: 1;
   max-width: 900px;          /* Keeps text nicely centered */
   padding: 20px;
+  font-size: 26px;
 }
 
 .hero h1 {
