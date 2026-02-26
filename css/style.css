@@ -66,15 +66,16 @@ body {
 .login-form .btn {
   width: 220px;
   padding: 10px;
-  background: #4facfe;
+  background: #2c3e50;
   border: none;
   border-radius: 5px;
   color: white;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .login-form .btn:hover {
-  background: #00c6fb;
+  background: #4b8393;
 }
 
 #loginMessage {
