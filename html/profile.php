@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (!empty($_SESSION['profile_message'])) {
+    echo "<p style='color:green'>" . $_SESSION['profile_message'] . "</p>";
+    unset($_SESSION['profile_message']); // clear message after showing
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,11 +21,19 @@
 <a href="index.html"><img src="../img/7.webp" alt="Apartment Logo"></a>
     </div>
     <ul class="nav-links">
+<<<<<<< HEAD:html/profile.html
       <li><a href="homepage.html">Home</a></li>
       <li><a href="payments.html">Payments</a></li>
       <li><a href="maintenance.html">Maintenance</a></li>
       <li><a href="profile.html" class="active">Profile</a></li>
       <li><a href="index.html" class="login-btn">Login</a></li>
+=======
+      <li><a href="homepage.php">Home</a></li>
+      <li><a href="payments.php">Payments</a></li>
+      <li><a href="maintenance.php">Maintenance</a></li>
+      <li><a href="profile.php" class="active">Profile</a></li>
+      <li><a href="index.php" class="login-btn">Login</a></li>
+>>>>>>> 62bde4dd552d879ee1c9ab229e3ce2c078e4ffaa:html/profile.php
     </ul>
   </nav>
 

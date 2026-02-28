@@ -55,17 +55,18 @@
 .signup-form .btn {
   width: 50%;
   padding: 10px;
-  background: #4facfe;
+  background: #2c3e50;
   border: none;
   border-radius: 5px;
   color: white;
   cursor: pointer;
   display: block;
   margin: auto;
+  font-weight: bold;
 }
 
 .signup-form .btn:hover {
-  background: #00c6fb;
+  background: #4b8393;
 }
 
 #signupMessage {

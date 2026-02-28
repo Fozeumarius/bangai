@@ -18,8 +18,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #4facfe;
+  background: #2c3e50;
   padding: 1rem 2rem;
+  font-weight: bold;
   
 
 }
@@ -49,7 +50,7 @@ body {
   text-decoration: underline;
 }
 .login-btn {
-  background: #ffeb3b;       
+  background: #f0e8a1;       
   color: #333;               
   font-weight: 800;          
   padding: 8px 16px;         
@@ -59,7 +60,7 @@ body {
 }
 
 .login-btn:hover {
-  background: #fdd835;       
+  background: #dcc455;       
   color: #000;              
   box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
 }
@@ -72,8 +73,10 @@ body {
 /* Hero Section */
 .hero {
   position: relative;
-  height: 650px;             /* Increased height */
-  background: url("../img/1.jpg") no-repeat center center/cover;
+  height: 400px;             /* Increased height */
+  background: url("../img/n2.jpg") no-repeat center center/cover;
+  font-weight: bold;
+  font-size: 26px;
 }
 
 .hero::after {
@@ -92,10 +95,11 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: white;
+  color: rgb(253, 251, 251);
   z-index: 1;
   max-width: 900px;          /* Keeps text nicely centered */
   padding: 20px;
+  font-size: 26px;
 }
 
 .hero h1 {
@@ -120,7 +124,7 @@ body {
 .apartments h2 {
   font-size: 2.4rem;         /* Slightly larger */
   margin-bottom: 40px;
-  color: #4facfe;
+  color: #2c3e50;
 }
 
 .apartment-levels {
@@ -161,7 +165,7 @@ body {
 .level a {
   display: inline-block;
   padding: 10px 18px;        /* Bigger button */
-  background: #4facfe;
+  background: #2c3e50;
   color: white;
   text-decoration: none;
   border-radius: 5px;
@@ -176,7 +180,7 @@ body {
 footer {
   text-align: center;
   padding: 1.2rem;
-  background: #4facfe;
+  background: #2c3e50;
   color: white;
   margin-top: 2rem;
 }
