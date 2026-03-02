@@ -103,6 +103,42 @@ $paymentsResult = $conn->query("
         </ul>
     </div>
 
+    <!-- ⚠️ Step 1: Upcoming Payment Alert -->
+    <?php
+    $alertQuery = $conn->query("
+        SELECT due_date 
+        FROM payments 
+        WHERE user_id=$userId 
+        ORDER BY id DESC 
+        LIMIT 1
+    ");
+    $alertRow = $alertQuery->fetch_assoc();
+
+    if ($alertRow && !empty($alertRow['due_date'])) {
+        $dueDate = $alertRow['due_date'];
+        $daysLeft = (strtotime($dueDate) - strtotime(date('Y-m-d'))) / 86400;
+
+        if ($daysLeft > 0 && $daysLeft <= 7) {
+            echo "
+            <div style='
+                background: #f39c12;
+                color: #fff;
+                padding: 12px 20px;
+                margin: 15px auto;
+                border-radius: 6px;
+                font-weight: bold;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+                width: 500px;
+                text-align: center;
+            '>
+                ⚠️ Reminder: Your next payment is due on " . date('F j, Y', strtotime($dueDate)) . 
+                " (in $daysLeft day" . ($daysLeft > 1 ? "s" : "") . ").
+            </div>
+            ";
+        }
+    }
+    ?>
+
     <!-- 🎨 Success message after redirect -->
     <?php if (!empty($_GET['msg']) && $_GET['msg'] === 'success') { 
         $latestPayment = $conn->query("SELECT due_date FROM payments WHERE user_id=$userId ORDER BY id DESC LIMIT 1");
@@ -141,7 +177,7 @@ $paymentsResult = $conn->query("
         <button type="submit" class="btn">Pay Now</button>
     </form>
 
-    <!-- Liste des paiements en tableau -->
+            <!-- Liste des paiements en tableau -->
     <?php if ($paymentsResult->num_rows > 0) { ?>
         <table>
             <thead>
@@ -153,6 +189,7 @@ $paymentsResult = $conn->query("
                     <th>Date</th>
                     <th>Status</th>
                     <th>Next Due Date</th>
+                    <th>Actions</th> <!-- ✅ New column -->
                 </tr>
             </thead>
             <tbody>
@@ -164,13 +201,76 @@ $paymentsResult = $conn->query("
                         <td><?= htmlspecialchars($payment['amount']) ?></td>
                         <td><?= htmlspecialchars($payment['payment_date']) ?></td>
                         <td><?= htmlspecialchars($payment['status']) ?></td>
-                        <td><?= htmlspecialchars($payment['due_date']) ?></td>
+                        <td><?= $payment['due_date'] ? htmlspecialchars($payment['due_date']) : '—' ?></td>
+                        <td>
+                            <!-- ✅ Green Edit button -->
+                            <a href="edit_payments.php?id=<?= $payment['id'] ?>" 
+                               style="background:#27ae60; color:#fff; padding:6px 12px; border-radius:4px; text-decoration:none; font-weight:bold;">
+                               ✏️ Edit
+                            </a>
+                        </td>
                     </tr>
-                <?php } ?>
+                <?php } ?> <!-- closes while loop -->
             </tbody>
         </table>
     <?php } else { ?>
         <p>No payments found for this user.</p>
-    <?php } ?>
+    <?php } ?> <!-- closes if block -->
+
+    <?php
+    $overdueQuery = $conn->query("
+        SELECT due_date, status 
+        FROM payments 
+        WHERE user_id=$userId 
+        ORDER BY id DESC 
+        LIMIT 1
+    ");
+    $overdueRow = $overdueQuery->fetch_assoc();
+
+    if ($overdueRow && !empty($overdueRow['due_date'])) {
+        $dueDate = $overdueRow['due_date'];
+        $status  = $overdueRow['status'];
+
+        if (strtotime($dueDate) < strtotime(date('Y-m-d')) && $status !== 'Completed') {
+            echo "
+            <div style='
+                background: #e74c3c;
+                color: #fff;
+                padding: 12px 20px;
+                margin: 15px auto;
+                border-radius: 6px;
+                font-weight: bold;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+                width: 500px;
+                text-align: center;
+            '>
+                ❌ Alert: Your payment scheduled for " . date('F j, Y', strtotime($dueDate)) . " is overdue. Please pay immediately.
+            </div>
+            ";
+
+            // 📧 Send overdue email
+            $to      = $user['email'];
+            $subject = "Overdue Payment Alert";
+            $body    = "Dear " . $user['username'] . ",\n\n" .
+                       "Our records show that your payment due on " . date('F j, Y', strtotime($dueDate)) . " has not been completed.\n" .
+                       "Please make the payment immediately to avoid penalties.\n\n" .
+                       "Best regards,\nYour Management Team";
+
+            $headers = "From: no-reply@bangue.com\r\n" .
+                       "Reply-To: no-reply@bangue.com\r\n" .
+                       "X-Mailer: PHP/" . phpversion();
+
+           file_put_contents("mail_log.txt", "To: $to\nSubject: $subject\n\n$body\n\n----------------------\n", FILE_APPEND );
+
+            // Insert overdue notification in DB
+            $overdueMessage = "Payment scheduled for " . date('F j, Y', strtotime($dueDate)) . " is overdue.";
+            $notifStmt3 = $conn->prepare("INSERT INTO notifications (user_id, message, type) VALUES (?, ?, 'error')");
+            $notifStmt3->bind_param("is", $userId, $overdueMessage);
+            $notifStmt3->execute();
+            $notifStmt3->close();
+        }
+    }
+    ?>
+
 </body>
 </html>
