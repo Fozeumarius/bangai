@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // connect to database
 $conn = new mysqli("localhost", "root", "", "bangue");
 
@@ -11,9 +13,14 @@ if ($conn->connect_error) {
 $query = "SELECT id, username, email FROM users";
 $result = $conn->query($query);
 
+// show success message if redirected
 if (!empty($_GET['msg'])) {
     echo "<p style='color:green'>" . htmlspecialchars($_GET['msg']) . "</p>";
 }
+
+// fetch latest notifications (limit 5)
+$userId = $_SESSION['user_id'] ?? 1; // adjust depending on your session setup
+$notifResult = $conn->query("SELECT * FROM notifications WHERE user_id=$userId AND is_read=0 ORDER BY created_at DESC LIMIT 5");
 ?>
 <!DOCTYPE html>
 <html>
@@ -80,6 +87,39 @@ if (!empty($_GET['msg'])) {
         .card button:hover {
             background: #0056b3;
         }
+        /* Notifications styling */
+        .notifications {
+            position: relative;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .notifications .bell {
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .notifications .dropdown {
+            display: none;
+            position: absolute;
+            left: 0;
+            background: #fff;
+            min-width: 250px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 6px;
+            z-index: 1000;
+        }
+        .notifications:hover .dropdown {
+            display: block;
+        }
+        .notifications p {
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .notifications p.success { background: #2ecc71; color: #fff; }
+        .notifications p.warning { background: #f39c12; color: #fff; }
+        .notifications p.error { background: #e74c3c; color: #fff; }
+        .notifications p.info { background: #3498db; color: #fff; }
     </style>
 </head>
 <body>
@@ -95,6 +135,22 @@ if (!empty($_GET['msg'])) {
             <li><a href="reports.php">Manage Reports</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
+
+        <!-- Notifications Bell -->
+        <div class="notifications">
+            <span class="bell">🔔 Notifications</span>
+            <div class="dropdown">
+                <?php if ($notifResult && $notifResult->num_rows > 0): ?>
+                    <?php while($notif = $notifResult->fetch_assoc()): ?>
+                        <p class="<?= $notif['type'] ?>">
+                            <?= htmlspecialchars($notif['message']) ?>
+                        </p>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <p>No new notifications</p>
+                <?php endif; ?>
+            </div>
+        </div>
     </div>
 
     <!-- Main content -->
@@ -103,16 +159,13 @@ if (!empty($_GET['msg'])) {
         <div class="card-container">
             <?php while($row = $result->fetch_assoc()) { ?>
                 <div class="card">
-                    <!-- Image par défaut -->
                     <img src="../img/icon.jpg" alt="Default User">
                     <h3><?= htmlspecialchars($row['username']) ?></h3>
                     <p><?= htmlspecialchars($row['email']) ?></p>
-                    <!-- Bouton Add Payment -->
                     <form action="user_payments.php" method="get">
                        <input type="hidden" name="user_id" value="<?= $row['id'] ?>">
                        <button type="submit">Add Payment</button>
                     </form>
-
                 </div>
             <?php } ?>
         </div>

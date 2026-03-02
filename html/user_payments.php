@@ -23,21 +23,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $accountNumber = $_POST['accountNumber'];
     $amount        = $_POST['amountInput'];
 
+    // Current payment date
+    $paymentDate = date('Y-m-d');
+    // Next due date = same day next month
+    $dueDate = date('Y-m-d', strtotime('+1 month', strtotime($paymentDate)));
+
     $stmt = $conn->prepare("
-        INSERT INTO payments (user_id, account_name, account_number, amount, payment_date, status)
-        VALUES (?, ?, ?, ?, NOW(), ?)
+        INSERT INTO payments (user_id, account_name, account_number, amount, payment_date, status, due_date)
+        VALUES (?, ?, ?, ?, NOW(), ?, ?)
     ");
     $status = "Completed"; 
-    $stmt->bind_param("issds", $userId, $accountName, $accountNumber, $amount, $status);
-    $stmt->execute();
+    $stmt->bind_param("issdss", $userId, $accountName, $accountNumber, $amount, $status, $dueDate);
+    if (!$stmt->execute()) {
+        die("Payment insert failed: " . $stmt->error);
+    }
     $stmt->close();
 
-    echo "<p style='color:green'>Payment added successfully!</p>";
+    // ✅ Insert notification for this payment
+    $message = "Payment of " . number_format($amount, 2) . " FCFA has been added successfully.";
+    $notifStmt = $conn->prepare("INSERT INTO notifications (user_id, message, type) VALUES (?, ?, 'success')");
+    $notifStmt->bind_param("is", $userId, $message);
+    $notifStmt->execute();
+    $notifStmt->close();
+
+    // ✅ Insert notification for next due date
+    $nextMessage = "Your next payment is due on " . date('F j, Y', strtotime($dueDate)) . ".";
+    $notifStmt2 = $conn->prepare("INSERT INTO notifications (user_id, message, type) VALUES (?, ?, 'info')");
+    $notifStmt2->bind_param("is", $userId, $nextMessage);
+    $notifStmt2->execute();
+    $notifStmt2->close();
+
+    // 📧 Send email to user
+    $to      = $user['email'];
+    $subject = "Payment Confirmation & Next Due Date";
+    $body    = "Dear " . $user['username'] . ",\n\n" .
+               "We have received your payment of " . number_format($amount, 2) . " FCFA.\n" .
+               "Account Name: " . $accountName . "\n" .
+               "Account Number: " . $accountNumber . "\n" .
+               "Status: " . $status . "\n\n" .
+               "Your next payment is due on " . date('F j, Y', strtotime($dueDate)) . ".\n" .
+               "We will remind you 5 days, 3 days, and 1 day before the due date.\n\n" .
+               "Best regards,\nYour Management Team";
+
+    $headers = "From: no-reply@bangue.com\r\n" .
+               "Reply-To: no-reply@bangue.com\r\n" .
+               "X-Mailer: PHP/" . phpversion();
+
+    mail($to, $subject, $body, $headers);
+
+    // 🚀 Redirect to avoid resubmission
+    header("Location: user_payments.php?user_id=$userId&msg=success");
+    exit();
 }
 
 // Récupérer ses paiements
 $paymentsResult = $conn->query("
-    SELECT id, account_number, account_name, amount, payment_date, status
+    SELECT id, account_number, account_name, amount, payment_date, status, due_date
     FROM payments
     WHERE user_id=$userId
 ");
@@ -47,7 +88,6 @@ $paymentsResult = $conn->query("
 <head>
     <link rel="stylesheet" href="../css/user_payments.css">
     <title><?= htmlspecialchars($user['username']) ?> - Payments</title>
-    
 </head>
 <body>
     <h2>Payments for <?= htmlspecialchars($user['username']) ?> (<?= htmlspecialchars($user['email']) ?>)</h2>
@@ -62,6 +102,30 @@ $paymentsResult = $conn->query("
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </div>
+
+    <!-- 🎨 Success message after redirect -->
+    <?php if (!empty($_GET['msg']) && $_GET['msg'] === 'success') { 
+        $latestPayment = $conn->query("SELECT due_date FROM payments WHERE user_id=$userId ORDER BY id DESC LIMIT 1");
+        $latest = $latestPayment->fetch_assoc();
+        $nextDueDate = $latest ? date('F j, Y', strtotime($latest['due_date'])) : '';
+    ?>
+        <div style='
+            background: #2ecc71;
+            color: #fff;
+            padding: 12px 20px;
+            margin: 15px auto;
+            border-radius: 6px;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            width: 400px;
+            text-align: center;
+        '>
+            ✅ Payment has been added successfully! 
+            <?php if ($nextDueDate) { ?>
+                Next payment due on <?= htmlspecialchars($nextDueDate) ?>.
+            <?php } ?>
+        </div>
+    <?php } ?>
 
     <!-- Formulaire d’ajout de paiement -->
     <form method="post">
@@ -88,6 +152,7 @@ $paymentsResult = $conn->query("
                     <th>Amount (FCFA)</th>
                     <th>Date</th>
                     <th>Status</th>
+                    <th>Next Due Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -99,6 +164,7 @@ $paymentsResult = $conn->query("
                         <td><?= htmlspecialchars($payment['amount']) ?></td>
                         <td><?= htmlspecialchars($payment['payment_date']) ?></td>
                         <td><?= htmlspecialchars($payment['status']) ?></td>
+                        <td><?= htmlspecialchars($payment['due_date']) ?></td>
                     </tr>
                 <?php } ?>
             </tbody>
