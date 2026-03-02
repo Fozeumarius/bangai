@@ -16,21 +16,25 @@ if (!empty($_SESSION['profile_message'])) {
   <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="logo">
-      <a href="index.html"><img src="../img/7.webp" alt="Apartment Logo"></a>
+      <a href="index.php"><img src="../img/7.webp" alt="Apartment Logo"></a>
     </div>
     <ul class="nav-links">
       <li><a href="homepage.php">Home</a></li>
       <li><a href="payments.php">Payments</a></li>
       <li><a href="maintenance.php">Maintenance</a></li>
       <li><a href="profile.php" class="active">Profile</a></li>
-      <li><a href="index.php" class="login-btn">Logout</a></li>
+      <?php if (isset($_SESSION['username'])): ?>
+        <li><a href="logout.php" class="login-btn">Logout</a></li>
+      <?php else: ?>
+        <li><a href="index.php" class="login-btn">Login</a></li>
+      <?php endif; ?>
     </ul>
   </nav>
 
   <!-- Page Header -->
   <header class="page-header">
     <h1>USER PROFILE</h1>
-    <p>View and update your personal informations.</p>
+    <p>View and update your personal information.</p>
   </header>
 
   <!-- Profile Section -->
@@ -73,7 +77,7 @@ if (!empty($_SESSION['profile_message'])) {
 
   <!-- Footer -->
   <footer>
-    <p>&copy; Bangue Apartment System — simplifying housing, payments, and maintenance for the Bangue community.</p>
+    <p>&copy; <?= date("Y"); ?> Bangue Apartment System — simplifying housing, payments, and maintenance for the Bangue community.</p>
   </footer>
 
   <!-- Integrated JavaScript -->
@@ -83,20 +87,17 @@ if (!empty($_SESSION['profile_message'])) {
     const changeBtn = document.getElementById("changePicBtn");
     const uploadInput = document.getElementById("uploadPic");
 
-    // Profile fields
     const userName = document.getElementById("userName");
     const userEmail = document.getElementById("userEmail");
     const userPhone = document.getElementById("userPhone");
     const userApartment = document.getElementById("userApartment");
 
-    // Edit form
     const editForm = document.getElementById("editForm");
     const editName = document.getElementById("editName");
     const editEmail = document.getElementById("editEmail");
     const editPhone = document.getElementById("editPhone");
     const editApartment = document.getElementById("editApartment");
 
-    // Load user data if it exists
     let user = JSON.parse(localStorage.getItem("user")) || null;
     const savedPhoto = localStorage.getItem("profilePhoto");
 
@@ -112,7 +113,6 @@ if (!empty($_SESSION['profile_message'])) {
         userPhone.textContent = "";
         userApartment.textContent = "";
       }
-
       if (savedPhoto) {
         profilePic.src = savedPhoto;
       }
@@ -120,7 +120,6 @@ if (!empty($_SESSION['profile_message'])) {
 
     displayUser();
 
-    // Save form data
     editForm.addEventListener("submit", (e) => {
       e.preventDefault();
       user = {
@@ -134,7 +133,6 @@ if (!empty($_SESSION['profile_message'])) {
       editForm.reset();
     });
 
-    // Change photo logic
     changeBtn.addEventListener("click", () => {
       uploadInput.click();
     });
