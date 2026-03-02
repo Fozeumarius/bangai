@@ -50,7 +50,7 @@ $result = $conn->query("SELECT id, username, email, role FROM users");
                 <td><?= $row['email'] ?></td>
                 <td><?= $row['role'] ?></td>
                 <td>
-                    <a href="edit_user.php?id=<?= $row['id'] ?>">Edit</a> |
+                    <a href="edit_users.php?id=<?= $row['id'] ?>">Edit</a> |
                     <a href="delete_user.php?id=<?= $row['id'] ?>" onclick="return confirm('Delete this user?')">Delete</a>
                 </td>
             </tr>

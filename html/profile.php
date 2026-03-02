@@ -1,31 +1,29 @@
 <?php
 session_start();
 if (!empty($_SESSION['profile_message'])) {
-    echo "<p style='color:green'>" . $_SESSION['profile_message'] . "</p>";
+    echo "<p style='color:green'>" . htmlspecialchars($_SESSION['profile_message']) . "</p>";
     unset($_SESSION['profile_message']); // clear message after showing
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>User Profile</title>
-  <link rel="stylesheet" href="..\css\profile.css">
+  <link rel="stylesheet" href="../css/profile.css">
 </head>
 <body>
   <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="logo">
-<a href="index.html"><img src="../img/7.webp" alt="Apartment Logo"></a>
+      <a href="index.html"><img src="../img/7.webp" alt="Apartment Logo"></a>
     </div>
     <ul class="nav-links">
       <li><a href="homepage.php">Home</a></li>
       <li><a href="payments.php">Payments</a></li>
       <li><a href="maintenance.php">Maintenance</a></li>
       <li><a href="profile.php" class="active">Profile</a></li>
-      <li><a href="index.php" class="login-btn">Login</a></li>
+      <li><a href="index.php" class="login-btn">Logout</a></li>
     </ul>
   </nav>
 
@@ -75,12 +73,11 @@ if (!empty($_SESSION['profile_message'])) {
 
   <!-- Footer -->
   <footer>
-    <p>&copy; Bangue Apartment System — simplifying housing, payments, and maintenance for the Bangue community..</p>
+    <p>&copy; Bangue Apartment System — simplifying housing, payments, and maintenance for the Bangue community.</p>
   </footer>
 
   <!-- Integrated JavaScript -->
   <script>
-    
   document.addEventListener("DOMContentLoaded", () => {
     const profilePic = document.getElementById("profilePic");
     const changeBtn = document.getElementById("changePicBtn");
@@ -154,9 +151,6 @@ if (!empty($_SESSION['profile_message'])) {
       }
     });
   });
-</script>
-
-
   </script>
 </body>
 </html>

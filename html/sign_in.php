@@ -1,38 +1,43 @@
 <?php
+session_start();
+
 // Connect to MySQL
 $conn = new mysqli("localhost", "root", "", "bangue");
-
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
 $message = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name      = $_POST['name'];
-    $email     = $_POST['email'];
-    $phone     = $_POST['phone'];
-    $apartment = $_POST['apartment'];
-    $username  = $_POST['username'];
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $name      = trim($_POST['name']);
+    $email     = trim($_POST['email']);
+    $phone     = trim($_POST['phone']);
+    $apartment = trim($_POST['apartment']);
+    $username  = trim($_POST['username']);
     $password  = $_POST['password'];
 
     // Hash the password for security
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // Insert into database (expand table to include extra fields if needed)
-    $stmt = $conn->prepare("INSERT INTO users (username, password, email) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $username, $hashedPassword, $email);
+    // Insert all fields into database
+    $stmt = $conn->prepare("INSERT INTO users (name, email, phone, apartment, username, password) 
+                            VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $name, $email, $phone, $apartment, $username, $hashedPassword);
 
     if ($stmt->execute()) {
-        $message = "Account created successfully ✔";
-        // Redirect to login after 2 seconds
-        header("refresh:2;url=login.php");
+        // ✅ Log the user in immediately
+        $_SESSION['user_id'] = $conn->insert_id;
+        $_SESSION['username'] = $username;
+
+        // ✅ Redirect straight to homepage
+        header("Location: homepage.php");
+        exit();
     } else {
         $message = "Error: " . $stmt->error;
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -37,7 +37,7 @@ $user = $result->fetch_assoc();
       </a>
     </div>
     <ul class="nav-links">
-      <li><a href="home.php">Home</a></li>
+      <li><a href="homepage.php">Home</a></li>
       <li><a href="payments.php">Payments</a></li>
       <li><a href="maintenance.php">Maintenance</a></li>
       <li><a href="profile.php">Profile</a></li>
@@ -57,7 +57,7 @@ $user = $result->fetch_assoc();
     <h2>Explore Apartments in Bangue</h2>
     <div class="apartment-levels">
       <div class="level">
-        <img src="../img/n2.jpg" alt="Beginner Apartment">
+        <img src="../img/room2.jpg" alt="Beginner Apartment">
         <h3>Starter Homes</h3>
         <p>Affordable apartments with basic amenities, perfect for first-time renters.</p>
       </div>

@@ -1,0 +1,140 @@
+/* General page layout */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f6f9;
+    color: #333;
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 220px;
+    background: #2c3e50;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.sidebar h2 {
+    color: #ecf0f1;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    color: #bdc3c7;
+    text-decoration: none;
+    display: block;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background: #34495e;
+    color: #fff;
+}
+
+/* Main content area */
+.main-content {
+    margin-left: 240px;
+    padding: 20px;
+}
+
+.main-content h2 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background: #2c3e50;
+    color: #fff;
+}
+
+table tr:hover {
+    background: #f1f1f1;
+}
+
+table a {
+    color: #2980b9;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+table a:hover {
+    text-decoration: underline;
+}
+
+/* Form styling (Edit User page) */
+form {
+    background: #fff;
+    padding: 20px;
+    max-width: 400px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 6px;
+}
+
+form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    background: #2980b9;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+form button:hover {
+    background: #1f6391;
+}
+
+form a {
+    margin-left: 10px;
+    color: #7f8c8d;
+    text-decoration: none;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
