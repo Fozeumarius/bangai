@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 $conn = new mysqli("localhost", "root", "", "bangue");
 
 if ($conn->connect_error) {
@@ -29,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dueDate = date('Y-m-d', strtotime('+1 month', strtotime($paymentDate)));
 
     $stmt = $conn->prepare("
-        INSERT INTO payments (user_id, account_name, account_number, amount, payment_date, status, due_date)
+        INSERT INTO payments (user_id, account_name,created_at, account_number, amount, payment_date, status, due_date)
         VALUES (?, ?, ?, ?, NOW(), ?, ?)
     ");
     $status = "Completed"; 
@@ -231,6 +232,7 @@ $paymentsResult = $conn->query("
         $dueDate = $overdueRow['due_date'];
         $status  = $overdueRow['status'];
 
+             // Overdue Payment alert
         if (strtotime($dueDate) < strtotime(date('Y-m-d')) && $status !== 'Completed') {
             echo "
             <div style='
@@ -271,6 +273,30 @@ $paymentsResult = $conn->query("
         }
     }
     ?>
+    <?php
+
+include __DIR__ . '/db_connect.php';
+
+$userId = $_SESSION['user_id']; // logged-in user
+// Fetch username
+$userRes = $conn->query("SELECT username FROM users WHERE id=$userId");
+$userRow = $userRes->fetch_assoc();
+$username = $userRow['username'];
+
+// Insert payment
+$amount = 600000;
+$conn->query("INSERT INTO payments (user_id, amount, created_at) VALUES ($userId, $amount, NOW())");
+
+// Build notification message
+$message = "User $username made a payment of $amount FCFA.";
+
+// Insert admin notification
+$stmt = $conn->prepare("INSERT INTO admin_notifications (user_id, message, type, is_read, created_at) VALUES (?, ?, 'info', 0, NOW())");
+$stmt->bind_param("is", $userId, $message);
+$stmt->execute();
+$stmt->close();
+?>
+
 
 </body>
 </html>

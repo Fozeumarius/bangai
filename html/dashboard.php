@@ -65,6 +65,35 @@ $result = $conn->query("SELECT * FROM notifications WHERE user_id=$userId AND is
   <!-- Dashboard Cards -->
   <section class="dashboard">
     <!-- your cards here -->
+     <section class="dashboard">
+  <h2>Quick Actions</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Manage Users</h3>
+      <p>View, add, or update tenant accounts.</p>
+      <img src="../img/user.jpg" alt="Beginner Apartment">
+      <button class="btn" onclick="location.href='manage_users.php'">Users</button>
+    </div>
+    <div class="card">
+      <h3>Manage Payments</h3>
+      <p>Verify and track rent and utility payments.</p>
+      <img src="../img/pay.jpg" alt="Beginner Apartment">
+      <button class="btn" onclick="location.href='manage_payment.php'">Payments</button>
+    </div>
+    <div class="card">
+      <h3>Manage Maintenance</h3>
+      <p>Review and assign maintenance requests.</p>
+      <img src="../img/main.jpg" alt="Beginner Apartment">
+      <button class="btn" onclick="location.href='manage_maintenance.php'">Maintenace</button>
+    </div>
+    <div class="card">
+      <h3>Manage Reports</h3>
+      <p>Generate monthly or annual reports.</p>
+      <img src="../img/rep.jpg" alt="Beginner Apartment">
+      <button class="btn" onclick="location.href='reports.php'">Reports</button>
+    </div>
+  </div>
+</section>
   </section>
 
   <!-- Footer -->
