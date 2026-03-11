@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <li><a href="payments.php">Payments</a></li>
       <li><a href="maintenance.php">Maintenance</a></li>
       <li><a href="profile.php">Profile</a></li>
-      <li><a href="index.php" class="login-btn">Login</a></li>
+      <li><a href="index.php" class="login-btn">Logout</a></li>
     </ul>
   </nav>
 

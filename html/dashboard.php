@@ -61,9 +61,7 @@ $result = $conn->query("SELECT * FROM notifications WHERE user_id=$userId AND is
       <p>Here’s your overview of the Bangue Apartment System.</p>
     </div>
   </header>
-
-  <!-- Dashboard Cards -->
-  <section class="dashboard">
+  
     <!-- your cards here -->
      <section class="dashboard">
   <h2>Quick Actions</h2>
